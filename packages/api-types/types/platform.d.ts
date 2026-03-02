@@ -5148,7 +5148,12 @@ export interface components {
       | {
           billing_email: string | null
           /** @enum {string|null} */
-          billing_partner: 'fly' | 'aws_marketplace' | 'vercel_marketplace' | null
+          billing_partner:
+            | 'fly'
+            | 'aws_marketplace'
+            | 'vercel_marketplace'
+            | 'company_product'
+            | null
           id: number
           is_owner: boolean
           name: string
@@ -5200,8 +5205,6 @@ export interface components {
       db_sql?: string
       /** @enum {string} */
       desired_instance_size?:
-        | 'pico'
-        | 'nano'
         | 'micro'
         | 'small'
         | 'medium'
@@ -5226,7 +5229,7 @@ export interface components {
        * @description Postgres engine version. If not provided, the latest version will be used.
        * @enum {string}
        */
-      postgres_engine?: '13' | '14' | '15' | '17' | '17-oriole'
+      postgres_engine?: '15' | '17' | '17-oriole'
       /** @description Provider region selection. Only one of db_region or region_selection can be specified. */
       region_selection?:
         | {
@@ -6499,7 +6502,7 @@ export interface components {
       }[]
       billing_cycle_anchor: number
       /** @enum {string} */
-      billing_partner?: 'fly' | 'aws_marketplace' | 'vercel_marketplace'
+      billing_partner?: 'fly' | 'aws_marketplace' | 'vercel_marketplace' | 'company_product'
       billing_via_partner: boolean
       current_period_end: number
       current_period_start: number
@@ -6703,6 +6706,8 @@ export interface components {
     GoTrueConfigResponse: {
       API_MAX_REQUEST_DURATION: number | null
       AUDIT_LOG_DISABLE_POSTGRES: boolean | null
+      CUSTOM_OAUTH_ENABLED: boolean
+      CUSTOM_OAUTH_MAX_PROVIDERS: number
       DB_MAX_POOL_SIZE: number | null
       /** @enum {string|null} */
       DB_MAX_POOL_SIZE_UNIT: 'connections' | 'percent' | null
@@ -7144,6 +7149,7 @@ export interface components {
             | 'auth.leaked_password_protection'
             | 'auth.advanced_auth_settings'
             | 'backup.retention_days'
+            | 'backup.restore_to_new_project'
             | 'function.max_count'
             | 'function.size_limit_mb'
             | 'realtime.max_concurrent_users'
@@ -7505,7 +7511,7 @@ export interface components {
     OrganizationResponse: {
       billing_email: string | null
       /** @enum {string|null} */
-      billing_partner: 'fly' | 'aws_marketplace' | 'vercel_marketplace' | null
+      billing_partner: 'fly' | 'aws_marketplace' | 'vercel_marketplace' | 'company_product' | null
       id: number
       is_owner: boolean
       name: string
@@ -7568,7 +7574,7 @@ export interface components {
     OrganizationSlugResponse: {
       billing_email: string | null
       /** @enum {string|null} */
-      billing_partner: 'fly' | 'aws_marketplace' | 'vercel_marketplace' | null
+      billing_partner: 'fly' | 'aws_marketplace' | 'vercel_marketplace' | 'company_product' | null
       has_oriole_project: boolean
       id: number
       name: string
@@ -9818,6 +9824,7 @@ export interface components {
     UpdateGoTrueConfigBody: {
       API_MAX_REQUEST_DURATION?: number | null
       AUDIT_LOG_DISABLE_POSTGRES?: boolean | null
+      CUSTOM_OAUTH_ENABLED?: boolean
       DB_MAX_POOL_SIZE?: number | null
       /** @enum {string|null} */
       DB_MAX_POOL_SIZE_UNIT?: 'connections' | 'percent' | null
@@ -17174,6 +17181,7 @@ export interface operations {
           | 'auth.leaked_password_protection'
           | 'auth.advanced_auth_settings'
           | 'backup.retention_days'
+          | 'backup.restore_to_new_project'
           | 'function.max_count'
           | 'function.size_limit_mb'
           | 'realtime.max_concurrent_users'
@@ -22735,8 +22743,6 @@ export interface operations {
       query: {
         cloud_provider: 'AWS' | 'FLY' | 'AWS_K8S' | 'AWS_NIMBUS'
         desired_instance_size?:
-          | 'pico'
-          | 'nano'
           | 'micro'
           | 'small'
           | 'medium'
