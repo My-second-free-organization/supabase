@@ -265,6 +265,7 @@ export const RestoreToNewProject = () => {
         selectedBackupId={selectedBackupId}
         recoveryTimeTarget={recoveryTimeTarget}
         additionalMonthlySpend={additionalMonthlySpend}
+        hasAccess={hasAccessToRestoreToNewProject}
         onOpenChange={setShowNewProjectDialog}
         onCloneSuccess={() => {
           refetchCloneStatus()
@@ -316,6 +317,7 @@ export const RestoreToNewProject = () => {
       ) : (
         <BackupsList
           disabled={isRestoring}
+          hasAccess={hasAccessToRestoreToNewProject}
           onSelectRestore={(id) => {
             setSelectedBackupId(id)
             setShowConfirmationDialog(true)
