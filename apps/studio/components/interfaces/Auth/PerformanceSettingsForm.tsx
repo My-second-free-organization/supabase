@@ -47,7 +47,7 @@ const FormSchema = z.object({
 export const PerformanceSettingsForm = () => {
   const { data: project } = useSelectedProjectQuery()
   const { hasAccess: hasAccessToPerformance, isLoading: isLoadingEntitlement } =
-    useCheckEntitlements('auth.performance')
+    useCheckEntitlements('auth.performance_settings')
   const { can: canReadConfig } = useAsyncCheckPermissions(
     PermissionAction.READ,
     'custom_config_gotrue'
