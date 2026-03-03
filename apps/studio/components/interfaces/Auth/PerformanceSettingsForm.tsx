@@ -181,7 +181,7 @@ export const PerformanceSettingsForm = () => {
     )
   }
 
-  if (isLoadingAuthConfig) {
+  if (isLoadingAuthConfig || isLoadingEntitlement) {
     return (
       <ScaffoldSection isFullWidth>
         <GenericSkeletonLoader />
